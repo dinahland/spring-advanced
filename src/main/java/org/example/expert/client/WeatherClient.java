@@ -27,13 +27,14 @@ public class WeatherClient {
                 restTemplate.getForEntity(buildWeatherApiUri(), WeatherDto[].class);
 
         WeatherDto[] weatherArray = responseEntity.getBody();
-        if (!HttpStatus.OK.equals(responseEntity.getStatusCode())) {
+        if (!HttpStatus.OK.equals(responseEntity.getStatusCode())) {    //응답 코드가 OK가 아닌 경우
             throw new ServerException("날씨 데이터를 가져오는데 실패했습니다. 상태 코드: " + responseEntity.getStatusCode());
-        } else {
-            if (weatherArray == null || weatherArray.length == 0) {
-                throw new ServerException("날씨 데이터가 없습니다.");
-            }
         }
+
+        if (weatherArray == null || weatherArray.length == 0) {  // body가 null 또는 비어있는 경우
+            throw new ServerException("날씨 데이터가 없습니다.");
+        }
+
 
         String today = getCurrentDate();
 
