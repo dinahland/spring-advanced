@@ -23,7 +23,7 @@ public class LoggingAspect {
     private final ObjectMapper objectMapper;
     private final JwtUtil jwtUtil;
 
-    @Around("@annotation(org.example.expert.domain.LogAdminAccess)")
+    @Around("@annotation(org.example.expert.annotation.LogAdminAccess)")
     public Object logAdminAccess(ProceedingJoinPoint joinPoint) throws Throwable {
         /* 메서드 실행 전: 요청 데이터 로깅 */
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
